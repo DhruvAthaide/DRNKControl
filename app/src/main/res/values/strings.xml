@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DRNK Control</string>
+    <string name="accessibility_service_description">DRNK Control Accessibility Service. This service is required to monitor supported social messaging apps to intercept communication while Safety Mode is Active.</string>
 </resources>
