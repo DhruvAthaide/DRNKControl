@@ -75,6 +75,9 @@ dependencies {
     // Location
     implementation(libs.play.services.location)
 
+    // Image Loading
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

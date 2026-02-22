@@ -3,7 +3,7 @@ package com.dhruvathaide.drnkcontrol.ui.review
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dhruvathaide.drnkcontrol.data.GhostMessageEntity
-import com.dhruvathaide.drnkcontrol.domain.MessageRepository
+import com.dhruvathaide.drnkcontrol.domain.SafetyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReviewViewModel @Inject constructor(
-    private val repository: MessageRepository
+    private val repository: SafetyRepository
 ) : ViewModel() {
 
     val pendingMessages: Flow<List<GhostMessageEntity>> = repository.getPendingMessages()

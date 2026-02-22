@@ -37,4 +37,10 @@ object DatabaseModule {
     fun provideGhostMessageDao(database: GhostDatabase): GhostMessageDao {
         return database.ghostMessageDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideBlockedAppDao(database: GhostDatabase): BlockedAppDao {
+        return database.blockedAppDao()
+    }
 }
