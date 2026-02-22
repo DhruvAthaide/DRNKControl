@@ -112,7 +112,7 @@ private fun LockdownIntro(appName: String, onStart: () -> Unit, onBack: () -> Un
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .glassmorphism(cornerRadius = 40.dp, alpha = 0.1f, blur = 30.dp)
+            .glassmorphism(cornerRadius = 40.dp, alpha = 0.1f)
     ) {
         Column(
             modifier = Modifier.padding(32.dp),

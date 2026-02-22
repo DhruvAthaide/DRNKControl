@@ -157,8 +157,7 @@ fun AppItem(app: AppInfo, onToggle: () -> Unit) {
             .scale(scale)
             .glassmorphism(
                 cornerRadius = 24.dp,
-                alpha = if (app.isBlocked) 0.15f else 0.05f,
-                blur = 20.dp
+                alpha = if (app.isBlocked) 0.15f else 0.05f
             )
             .clickable { 
                 isPressed = true
