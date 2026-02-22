@@ -19,15 +19,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dhruvathaide.drnkcontrol.ui.components.FluidButton
 import com.dhruvathaide.drnkcontrol.ui.components.glassmorphism
 import com.dhruvathaide.drnkcontrol.ui.theme.ElectricAmethyst
 import com.dhruvathaide.drnkcontrol.ui.theme.MidnightNavy
 
 @Composable
 fun DashboardScreen(
-    viewModel: DashboardViewModel = hiltViewModel()
+    viewModel: DashboardViewModel = hiltViewModel(),
+    onNavigateToChallenges: () -> Unit,
+    onNavigateToReview: () -> Unit
 ) {
     val isSafetyModeActive by viewModel.isSafetyModeActive.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent.collect { event ->
+            when (event) {
+                is DashboardViewModel.DashboardNavigationEvent.StartChallenges -> {
+                    onNavigateToChallenges()
+                }
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -52,7 +65,15 @@ fun DashboardScreen(
             onClick = { viewModel.toggleSafetyMode() }
         )
 
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(48.dp))
+
+        // Review Queue Access
+        FluidButton(
+            text = "Review Buffered Messages",
+            onClick = onNavigateToReview
+        )
+
+        Spacer(modifier = Modifier.height(48.dp))
 
         Box(
             modifier = Modifier
@@ -60,7 +81,7 @@ fun DashboardScreen(
                 .glassmorphism(cornerRadius = 24.dp)
         ) {
             Column(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(16.dp).fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(

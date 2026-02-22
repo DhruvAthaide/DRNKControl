@@ -28,6 +28,7 @@ object DatabaseModule {
             "ghost_database.db"
         )
         .openHelperFactory(factory)
+        .fallbackToDestructiveMigration()
         .build()
     }
 

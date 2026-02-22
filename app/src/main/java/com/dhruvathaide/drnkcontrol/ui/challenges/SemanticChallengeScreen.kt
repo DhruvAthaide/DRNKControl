@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dhruvathaide.drnkcontrol.ui.components.FluidButton
 import com.dhruvathaide.drnkcontrol.ui.theme.ElectricAmethyst
 import com.dhruvathaide.drnkcontrol.ui.theme.MidnightNavy
@@ -17,6 +18,7 @@ import com.dhruvathaide.drnkcontrol.ui.theme.MidnightNavy
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SemanticChallengeScreen(
+    viewModel: ChallengeViewModel = hiltViewModel(),
     onSuccess: () -> Unit
 ) {
     val targetSentence = "The turquoise turtle toggles the temporal trigger"
@@ -85,7 +87,7 @@ fun SemanticChallengeScreen(
             text = "Verify",
             onClick = {
                 if (userInput == targetSentence) {
-                    onSuccess()
+                    viewModel.completeFinalChallenge(onSuccess)
                 } else {
                     isError = true
                     userInput = "" // Clear on failure to make it harder

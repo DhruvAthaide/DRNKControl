@@ -26,9 +26,10 @@ fun DRNKNavGraph(navController: NavHostController = rememberNavController()) {
         startDestination = Screen.Dashboard.route
     ) {
         composable(Screen.Dashboard.route) {
-            DashboardScreen()
-            // In a real implementation we would pass callbacks to navigate
-            // e.g. onNavigateToReview = { navController.navigate(Screen.ReviewQueue.route) }
+            DashboardScreen(
+                onNavigateToChallenges = { navController.navigate(Screen.GyroChallenge.route) },
+                onNavigateToReview = { navController.navigate(Screen.ReviewQueue.route) }
+            )
         }
         
         composable(Screen.GyroChallenge.route) {
@@ -45,13 +46,22 @@ fun DRNKNavGraph(navController: NavHostController = rememberNavController()) {
         
         composable(Screen.SemanticChallenge.route) {
             SemanticChallengeScreen(
-                onSuccess = { navController.navigate(Screen.Dashboard.route) }
+                onSuccess = { 
+                    // This handled inside the screen via ChallengeViewModel now
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                }
             )
         }
         
         composable(Screen.ReviewQueue.route) {
             ReviewQueueScreen(
-                onEmergencyWipe = { navController.navigate(Screen.Dashboard.route) }
+                onEmergencyWipe = { 
+                    navController.navigate(Screen.Dashboard.route) {
+                         popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                }
             )
         }
     }

@@ -21,4 +21,10 @@ interface GhostMessageDao {
 
     @Query("DELETE FROM ghost_messages")
     suspend fun deleteAllMessages()
+
+    @Query("SELECT * FROM app_settings WHERE id = 1")
+    fun getSettings(): Flow<SettingsEntity?>
+
+    @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
+    suspend fun updateSettings(settings: SettingsEntity)
 }

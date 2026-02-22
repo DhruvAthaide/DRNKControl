@@ -29,4 +29,10 @@ class MessageRepository @Inject constructor(
     suspend fun clearQueue() {
         messageDao.deleteAllMessages()
     }
+
+    fun getSettings(): Flow<com.dhruvathaide.drnkcontrol.data.SettingsEntity?> = messageDao.getSettings()
+
+    suspend fun updateSafetyMode(active: Boolean) {
+        messageDao.updateSettings(com.dhruvathaide.drnkcontrol.data.SettingsEntity(isSafetyModeActive = active))
+    }
 }
